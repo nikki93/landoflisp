@@ -62,3 +62,22 @@
         (progn (setf *location* (car next))
                (look))
         '(you cannot go that way.))))
+
+
+;; inventory
+
+(defun pickup (object)
+  (cond ((member object
+                 (objects-at *location* *objects* *object-locations*))
+         (push `(,object body) *object-locations*)
+         `(you are now carrying the ,object))
+        (t '(you cannot get that.))))
+
+(defun inventory ()
+  (cons 'items- (objects-at 'body *objects* *object-locations*)))
+
+(defun say-hello ()
+  (princ "Please type your name: ")
+  (let ((name (read-line)))
+    (princ "Nice to meet you, ")
+    (princ name)))
